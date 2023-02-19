@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="hubert">
+
+    <joint name="camera_stick_joint" type ="fixed">
+        <parent link="chassis"/>
+        <child link="camera_stick_link"/>
+        <!-- <origin xyz = "${chassis_radius} 0 ${chassis_height/2}" rpy = "0 ${-pi/3} 0" /> -->
+        <origin xyz = "0 0 ${chassis_height/2}" rpy = "0 ${-pi/2} 0" /> 
+    </joint>
+    
+    <!--
+    <link name="camera_stick_link">
+        <visual>
+            <origin xyz="${camera_stick_length}/2 0 0"/>
+            <geometry>
+                <sphere radius="${camera_stick_radius}"/>
+            </geometry>
+            <material name="orange"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <cylinder radius="${camera_stick_radius}" length="${camera_stick_length}"/> 
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass="${camera_stick_mass}" radius="${camera_stick_radius}" length="${camera_stick_length}">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
+    </link>
+    -->
+
+    <link name="camera_stick_link">
+        <visual>
+            <origin xyz = "${camera_stick_length/2}  0 0" rpy = "0 0 0" />
+            <geometry>
+                <box size = "${camera_stick_length} ${camera_stick_thickness} ${camera_stick_thickness}"/>
+            </geometry>
+            <material name="orange"/>
+        </visual>
+    </link>
+
+    <joint name="camera_joint" type ="fixed">
+        <parent link="camera_stick_link"/>
+        <child link="camera_link"/>
+        <origin xyz = "${camera_stick_length} 0 0" rpy = "0 ${5*pi/6} 0" />
+    </joint>
+
+    <link name="camera_link">
+        <visual>
+            <geometry>
+                <box size = "0.01 0.02 0.02"/>
+            </geometry>
+            <material name="orange"/>
+        </visual>
+    </link>
+
+    <joint name="camera_optical_joint" type ="fixed">
+        <parent link="camera_link"/>
+        <child link="camera_link_optical"/>
+        <origin xyz = "0 0 0" rpy = "${-pi/2} 0 ${-pi/2}" />
+    </joint>
+
+    <link name="camera_link_optical"></link>    
+
+    <gazebo reference="camera_link">
+        <material>Gazebo/Orange</material>
+        <sensor name = "camera" type ="depth">
+            <pose> 0 0 0 0 0 0 </pose>
+            <visualize>true</visualize>
+            <update_rate>10</update_rate>
+            <camera>
+                <!-- <horizontal_fov>1.089</horizontal_fov> -->
+                <horizontal_fov>1.25</horizontal_fov> 
+                <vertical_fov>1.25</vertical_fov> 
+                <image>
+                    <fromat>B8G8R8</fromat>
+                    <width>640</width>
+                    <height>480</height>
+                </image>
+                <clip>
+                    <near>0.05</near>
+                    <far>8.0</far>
+                </clip>
+            </camera>
+            <plugin name = "camera_controller" filename = "libgazebo_ros_camera.so">
+                <frame_name>camera_link_optical</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+</robot>

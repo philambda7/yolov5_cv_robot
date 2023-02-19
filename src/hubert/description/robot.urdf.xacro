@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="hubert">
+
+    <!-- robot properties -->
+
+    <xacro:property name="chassis_radius" value="0.17"/>
+    <xacro:property name="chassis_height" value="0.08"/>
+    <xacro:property name="chassis_mass" value="3.5"/>
+
+    <xacro:property name="chassis_clearance" value="0.01"/>
+
+    <xacro:property name="wheel_radius" value="0.04"/>
+    <xacro:property name="wheel_thickness" value="0.02"/>
+    <xacro:property name="wheel_mass" value="0.05"/>
+    <xacro:property name="wheel_offset_x" value="0"/>
+    <xacro:property name="wheel_offset_y" value="0.11"/>
+    <xacro:property name="wheel_offset_z" value="${wheel_radius}"/>
+
+    <xacro:property name="clearance_epsilon" value="0.001"/>
+    
+    <xacro:property name="caster_wheel_radius" value="0.03"/>
+    <xacro:property name="caster_wheel_mass" value="0.01"/>
+    <xacro:property name="caster_wheel_offset_x" value="0.13"/>
+    <xacro:property name="caster_wheel_offset_z" value="${caster_wheel_radius + clearance_epsilon}"/>
+
+    <xacro:property name="mob_radius" value="0.04"/>
+    <xacro:property name="mob_width" value="0.18"/>
+    <xacro:property name="mob_mass" value="0.1"/>
+    <xacro:property name="mob_offset_x" value="-0.1"/>
+    <xacro:property name="mob_offset_z" value="${mob_radius + clearance_epsilon}"/>
+
+    <xacro:property name="camera_stick_thickness" value="0.005"/>
+    <xacro:property name="camera_stick_length" value="0.4"/>
+    <xacro:property name="camera_stick_mass" value="0.1"/>
+
+    <!-- robot components -->
+
+    <xacro:include filename="inertial_macros.xacro" />
+
+    <xacro:include filename="robot_core.xacro"/>
+
+    <xacro:include filename="lidar.xacro" />
+
+    <xacro:include filename="camera.xacro" />
+  
+    <!-- robot control -->
+
+    <xacro:include filename="gazebo_control.xacro"/>
+    
+</robot>
