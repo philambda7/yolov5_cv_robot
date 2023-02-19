@@ -6,7 +6,11 @@ This Repository contains a ros2 package for inference on custom yolov5 models, a
 
 Let's say you want to give your autonomous robot the ability to perceive specific objects that are flat or level with the ground. E.g. to perceive floor markings for navigation. Or to avoid it rolling over or stepping on dangerous areas like water or oil puddles, or valuable objects like the receipt for that laptop you wanted to return and later find in the dirt container of your vacuum robot. In this project, we explore how yolo computer vision can be deployed for perception within the ros2 framework.
 
-In this toy example, we meet Hubert, the cleaning robot residing in our institute's common room. We simulate navigation tasks where Hubert has to avoid Doppelkopf playing cards that someone dropped carelessly onto the ground. 
+In this toy example, we meet Hubert, the cleaning robot residing in our institute's common room. We simulate navigation tasks where Hubert has to avoid Doppelkopf playing cards that someone dropped carelessly onto the ground.
+
+![robo](https://user-images.githubusercontent.com/90965716/219977326-e1d704a0-006b-49f4-ad47-14b808e3534c.gif)
+
+Left: costmap, Right: gazebo simulation. The robot navigates, sees an obstacle and reroutes.
 
 ## Installation
 
