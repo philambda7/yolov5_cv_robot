@@ -1,4 +1,4 @@
-# Yolov5 Computer Vision Robot
+# YOLOv5 Computer Vision Robot
 
 This Repository contains a ros2 package for inference on custom yolov5 models, a diff-drive robot named Hubert and slam/nav2 config and launch files to let Hubert navigate with yolov5-perception.
 
